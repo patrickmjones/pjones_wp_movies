@@ -1,0 +1,129 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Movie Review v1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2012-12-25 01:56:28+0000\n"
+"Last-Translator: patrickmjones <patrickmjones@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: pj-movies.php:21
+#@ pj-movies
+msgctxt "label"
+msgid "Movies"
+msgstr "Movies"
+
+#: pj-movies.php:23
+#@ pj-movies
+msgctxt "add_new_item"
+msgid "Add New Movie Review"
+msgstr "Add New Movie Review"
+
+#: pj-movies.php:24
+#@ pj-movies
+msgctxt "edit_item"
+msgid "Edit Movie Review"
+msgstr "Edit Movie Review"
+
+#: pj-movies.php:25
+#@ pj-movies
+msgctxt "new_item"
+msgid "New Movie Review"
+msgstr "New Movie Review"
+
+#: pj-movies.php:26
+#@ pj-movies
+msgctxt "view_item"
+msgid "View Movie Review"
+msgstr "View Movie Review"
+
+#: pj-movies.php:27
+#@ pj-movies
+msgctxt "search_items"
+msgid "Search Movie Reviews"
+msgstr "Search Movie Reviews"
+
+#: pj-movies.php:28
+#@ pj-movies
+msgctxt "not_found"
+msgid "No Movie Reviews Found"
+msgstr "No Movie Reviews Found"
+
+#: pj-movies.php:29
+#@ pj-movies
+msgctxt "not_found_in_trash"
+msgid "No Movie Reviews found in Trash"
+msgstr "No Movie Reviews found in Trash"
+
+#: pj-movies.php:31
+#@ pj-movies
+msgctxt "singular_label"
+msgid "Movie"
+msgstr "Movie"
+
+#: pj-movies.php:55
+#@ pj-movies
+msgctxt "column label"
+msgid "Movie Title"
+msgstr "Movie Title"
+
+#: pj-movies.php:56
+#@ pj-movies
+msgctxt "column label"
+msgid "Description"
+msgstr "Description"
+
+#: pj-movies.php:57
+#@ pj-movies
+msgctxt "column label"
+msgid "Version"
+msgstr "Version"
+
+#: pj-movies.php:58
+#@ pj-movies
+msgctxt "column label"
+msgid "Release Year"
+msgstr "Release Year"
+
+#: pj-movies.php:59
+#@ pj-movies
+msgctxt "column label"
+msgid "Personal Score"
+msgstr "Personal Score"
+
+#: pj-movies.php:60
+#@ pj-movies
+msgctxt "column label"
+msgid "Date"
+msgstr "Date"
+
+#: pj-movies.php:128
+#@ pj-movies
+msgctxt "form label"
+msgid "Personal Review Score"
+msgstr "Personal Review Score"
+
+#: pj-movies.php:133
+#@ pj-movies
+msgctxt "form label"
+msgid "Version"
+msgstr "Version"
+
+#: pj-movies.php:137
+#@ pj-movies
+msgctxt "form label"
+msgid "Release Year"
+msgstr "Release Year"
+
