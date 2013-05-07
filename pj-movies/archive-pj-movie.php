@@ -14,7 +14,11 @@ get_header(); ?>
 					Directed by <?php echo $meta["director"]; ?>
 				</p>
 				<div class="entry-summary">
-					<?php the_post_thumbnail(); ?>
+					<?php if($meta["thumbnailimage"]) { ?>
+						<img src="<?php echo $meta["thumbnailimage"]; ?>" class="thumbnail alignleft" />
+					<?php } else { 
+						the_post_thumbnail('thumbnail', array('class' => 'alignleft')); 
+					} ?>
 					<?php the_excerpt(); ?>
 				</div>
 				<div class="entry-meta">
@@ -46,6 +50,11 @@ get_header(); ?>
 			<?php comments_template( '', true ); ?>
 
 			<?php endwhile; ?>
+			<div class="navigation-links">
+				<!-- now show the paging links -->
+				<div class="alignleft"><?php previous_posts_link('Previous Entries'); ?></div>
+				<div class="alignright"><?php next_posts_link('Next Entries'); ?></div>
+			</div>
 
 		<?php else: ?>
 

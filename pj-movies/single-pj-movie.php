@@ -20,7 +20,7 @@ get_header(); // Loads the header.php template. ?>
 					<?php if($meta["thumbnailimage"]) { ?>
 						<img src="<?php echo $meta["thumbnailimage"]; ?>" class="thumbnail alignleft" />
 					<?php } else { 
-						the_post_thumbnail(); 
+						the_post_thumbnail('medium',array('class' => 'alignleft')); 
 					} ?>
 					<?php the_content(); ?>
 				</div>

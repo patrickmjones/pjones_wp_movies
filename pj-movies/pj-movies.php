@@ -33,6 +33,7 @@ class PJMovieReviews {
 			'public' => true,
 			'show_ui' => true,
 			'capability_type' => 'post',
+			'has_archive' => true,
 			'hierarchical' => false,
 			'rewrite' => array("slug" => "movies"),
 			'supports' => array('title', 'excerpt', 'editor', 'thumbnail', 'comments', 'revisions')
@@ -63,6 +64,7 @@ class PJMovieReviews {
 		add_action( 'admin_print_styles', array(&$this, 'enqueue_admin_styles') );
 		add_action( 'load-edit.php', array(&$this, 'edit_load') );
 		add_action('wp_ajax_pjmovie_search', array(&$this, 'search_callback'));
+		add_theme_support( 'post-thumbnails', array( 'movie' ) );
 		flush_rewrite_rules();
 	}
 	function register_post_type_archives( $post_type, $base_path = '' ) {
