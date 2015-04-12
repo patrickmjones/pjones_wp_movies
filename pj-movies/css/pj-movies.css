@@ -12,3 +12,16 @@ span.pj-movies-stars span {
     background-position: 0 0;
 }
 
+.entry.movie .entry-title {
+	font-size: 24px;
+}
+.entry.movie .byline {
+	font-size: 16px;
+}
+.entry.movie .pj-movies-viewmore {
+	font-size: 16px;
+}
+.entry.movie .entry-summary {
+	margin-bottom: 1em;
+	font-size: 18px;
+}

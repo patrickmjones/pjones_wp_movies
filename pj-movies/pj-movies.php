@@ -331,7 +331,130 @@ class PJMovieReviews {
 
 		update_post_meta($post_id, '_pjmovie_meta', $mydata);
 	}
+
 }
+// Add Shortcode
+function pjones_movies_moviedata_shortcode() {
+	$args = array (
+		'post_type'		=> 'movie',
+		'post_status'	=> 'published',
+		'nopaging'		=> true
+	);
+
+	// The Query
+	$query = new WP_Query( $args );
+
+	$cat_scores = array();
+	$cat_nums = array();
+
+	foreach($query->posts as $post) {
+		$cats = get_the_terms($post->ID, 'movie_categories');
+		$meta = get_post_meta($post->ID,'_pjmovie_meta',TRUE); 
+		$personalscore = $meta['personalscore'];
+
+		foreach($cats as $cat) {
+			$catname = html_entity_decode($cat->name);
+
+			/* Nums */
+			if(isset($cat_nums[$catname])) {
+				$cat_nums[$catname]++;
+			}else{
+				$cat_nums[$catname] = 1;
+			}			
+			/* Scores */
+			if(isset($cat_scores[$catname])) {
+				$cat_scores[$catname][] = $personalscore;
+			}else{
+				$cat_scores[$catname] = array();
+				$cat_scores[$catname][] = $personalscore;
+			}
+		}
+	}
+	arsort($cat_nums);
+	$encodedCatNums = json_encode($cat_nums);
+
+	foreach($cat_scores as $key => $val) {
+		$cat_scores[$key] = round(array_sum($val) / count($val), 2);
+	}
+	arsort($cat_scores);
+
+	$cat_scores_categories = array_keys($cat_scores);
+	$cat_scores_values = array_values($cat_scores);
+	$cat_scores_categories_encoded = json_encode($cat_scores_categories);
+	$cat_scores_values_encoded = json_encode($cat_scores_values);
+
+	$js_highcharts = plugins_url('js/highcharts.js', __FILE__);
+	$js_exporting = plugins_url('js/exporting.js', __FILE__);
+
+	return <<<HTML
+		<div id="moviepiechart-bycategory"></div>
+		<div id="moviecolchart-byaverage"></div>
+
+		<script src="$js_highcharts"></script>
+		<script src="$js_exporting"></script>
+		<script type="text/javascript">
+			
+			(function($){
+				var category_counts= $encodedCatNums ;
+				var catCountsRestructured = [];
+				for(var key in category_counts) {
+					catCountsRestructured[catCountsRestructured.length] = [key, category_counts[key]];
+				}
+
+				$(function(){
+					$('#moviepiechart-bycategory').highcharts({
+						chart: {
+							type: 'pie',
+							options3d: { enabled: true, alpha: 45 }
+					        },
+					        title: {
+					            text: 'Most Watched Movies by Category'
+					        },
+					        plotOptions: {
+					            pie: {
+							innerSize: 100,
+							depth: 45,
+							cursor: 'pointer',
+							dataLabels: { enabled: false},
+							showInLegend: true
+					            }
+					        },
+				        	series: [{
+					            name: 'Movies Watched',
+					            data: catCountsRestructured 
+					        }]
+					});
+					$('#moviecolchart-byaverage').highcharts({
+						chart: {
+							type: 'column'
+						},
+						title: {
+							text: "Highest Average Rating by Category"
+						},
+						xAxis: {
+							categories: $cat_scores_categories_encoded,
+							crosshair: true
+						},
+						yAxis: {
+							min: 0,
+							max: 5,
+							title: { text: 'Average Rating' }
+						},
+						plotOptions: {
+							column: {
+								pointPadding: 0.2,
+								borderWidth: 0
+							}
+						},
+						series: [{ name: 'Average Rating', data: $cat_scores_values_encoded }]
+					});
+				});
+			})(jQuery);
+		</script>
+HTML;
+
+}
+add_shortcode( 'moviedata', 'pjones_movies_moviedata_shortcode' );
 
 add_action("init", "PJMovieReviewsInit");
 function PJMovieReviewsInit() { global $pjmr; $pjmr = new PJMovieReviews(); }
