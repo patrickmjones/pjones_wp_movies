@@ -57,6 +57,41 @@ get_header(); // Loads the header.php template. ?>
 
 				</div>
 			</div>
+			<?php /*
+			<script type="application/ld+json">
+				{
+				  "@context" : "http://schema.org",
+				  "@type" : "Review",
+				  "author" : {
+				    "@type" : "Person",
+				    "name" : "<?php the_author(); ?>",
+				    "sameAs" : "<?php the_author_url(); ?>"
+				  },
+				  "datePublished" : "<?php the_date("c"); ?>",
+				  "description" : "<?php strip_tags(get_the_excerpt(true)); ?>",
+				  "itemReviewed" : {
+				    "@type" : "Movie",
+				    "name" : "<?php the_title(); ?>",
+				    "sameAs" : "http://www.imdb.com/title/tt<?php echo $imdbid; ?>/",
+				    "director" : {
+				      "@type" : "Person",
+				      "name" : "<?php echo $meta["director"]; ?>"
+				    }
+				  },
+				  "publisher" : {
+				    "@type" : "Organization",
+				    "name" : "<?php the_author(); ?>"
+				  },
+				  "reviewRating" : {
+				    "@type" : "Rating",
+				    "worstRating" : 1,
+				    "bestRating" : 5,
+				    "ratingValue" : <?php echo $meta["personalscore"]; ?>
+				  },
+				  "url" : "<?php the_permalink(); ?>"
+				}
+			</script>	
+			*/ ?>
 
 			<?php endwhile; ?>
 

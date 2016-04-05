@@ -34,6 +34,7 @@ class PJMovieReviews {
 			'show_ui' => true,
 			'capability_type' => 'post',
 			'has_archive' => true,
+			'menu_icon' => 'dashicons-video-alt3',
 			'hierarchical' => false,
 			'rewrite' => array("slug" => "movies"),
 			'supports' => array('title', 'excerpt', 'editor', 'thumbnail', 'comments', 'revisions')
@@ -64,8 +65,15 @@ class PJMovieReviews {
 		add_action( 'admin_print_styles', array(&$this, 'enqueue_admin_styles') );
 		add_action( 'load-edit.php', array(&$this, 'edit_load') );
 		add_action('wp_ajax_pjmovie_search', array(&$this, 'search_callback'));
-		add_theme_support( 'post-thumbnails', array( 'movie' ) );
+		add_action('wp_head', array(&$this, 'noindex_movies'));
+
+		add_theme_support( 'post-thumbnails', array('movie'));
 		flush_rewrite_rules();
+	}
+	function noindex_movies () {
+		if(get_post_type(get_the_ID()) == 'movie') {
+			echo '<meta name="robots" content="noindex">';
+		}
 	}
 	function register_post_type_archives( $post_type, $base_path = '' ) {
 		global $wp_rewrite;
@@ -156,6 +164,7 @@ class PJMovieReviews {
 			"description" => _x("Description", "column label", "pj-movies"),
 			"releaseyear" => _x("Release Year", "column label", "pj-movies"),
 			"personalscore" => _x("Personal Score", "column label", "pj-movies"),
+			"category" => _x("Categories", "column label", "pj-movies"),
 			"date" => _x("Date", "column label", "pj-movies")
 		);
 		if($_GET["mode"] != "excerpt") {
@@ -191,6 +200,14 @@ class PJMovieReviews {
 				break;
 			case "personalscore":
 				echo $meta["personalscore"];
+				break;
+			case "category":
+				$cats = get_the_terms($post->ID, 'movie_categories');
+				$cnames = array();
+				foreach($cats as $cat) {
+					array_push($cnames, $cat->name);
+				}
+				echo implode($cnames, ", ");
 				break;
 		}
 	}
